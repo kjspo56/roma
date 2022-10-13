@@ -2,11 +2,13 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/shop
     username: postgres
-    password: ted1234 #?? local??
+    password: ted1234
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: create
+
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher #라이브러리 오류 방지

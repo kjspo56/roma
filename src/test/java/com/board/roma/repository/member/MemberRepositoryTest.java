@@ -23,11 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DataJpaTest
-public class MemberRepositoryTest {
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    RoleRepository roleRepository;
+class MemberRepositoryTest {
+    @Autowired MemberRepository memberRepository;
+    @Autowired RoleRepository roleRepository;
     @PersistenceContext EntityManager em;
 
     @Test

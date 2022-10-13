@@ -1,12 +1,12 @@
-package com.board.roma.entity.config.security;
+package com.board.roma.config.security;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,11 +14,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig{
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        http
+       http
         .httpBasic().disable() // http basic 인증방법 비활성화
                 .formLogin().disable() // form login 비활성화
                 .csrf().disable() // csrf 관련 설정 비활성화
@@ -30,7 +31,14 @@ public class SecurityConfig{
     }
 
     @Bean
+    public WebSecurityCustomizer webSecurityCustomizer(){
+        return (web) -> web.ignoring()
+                .mvcMatchers("/**")
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder(); // 6
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder(); //
     }
 }

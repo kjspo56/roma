@@ -1,18 +1,17 @@
-package com.board.roma.learning;
+package learning;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class PasswordEncoderTest {
 
-    // 1
     PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     @Test
-    void encodeWithBcryptTest() { // 2
+    void encodeWithBcryptTest() {
         // given
         String password = "password";
 
@@ -24,7 +23,7 @@ public class PasswordEncoderTest {
     }
 
     @Test
-    void matchTest() { // 3
+    void matchTest() {
         // given
         String password = "password";
         String encodedPassword = passwordEncoder.encode(password);
