@@ -7,3 +7,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher #라이브러리 오류 방지

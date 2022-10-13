@@ -20,13 +20,13 @@ public class Member extends EntityDate {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(nullable = false, length = 20)
-    private String username;
-
     @Column(nullable = false, length = 30, unique = true)
     private String email;
 
     private String password;
+
+    @Column(nullable = false, length = 20)
+    private String username;
 
     @Column(nullable = false, unique = true, length = 20)
     private String nickname;
@@ -34,7 +34,7 @@ public class Member extends EntityDate {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MemberRole> roles;
 
-    public Member(String email, String password, String username, String nickname, List<Role> roles){
+    public Member(String email, String password, String username, String nickname, List<Role> roles) {
         this.email = email;
         this.password = password;
         this.username = username;
@@ -42,7 +42,7 @@ public class Member extends EntityDate {
         this.roles = roles.stream().map(r -> new MemberRole(this, r)).collect(toSet());
     }
 
-    public void updateNickname(String nickname){
+    public void updateNickname(String nickname) {
         this.nickname = nickname;
     }
 }
